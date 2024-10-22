@@ -4,7 +4,7 @@
 
 Bayesian Linear Regression extends classical linear regression by treating the model parameters as **random variables** rather than fixed values. This approach allows us to **incorporate uncertainty** into the model’s predictions, providing a **distribution over parameters and predictions**. With Bayesian inference, instead of finding a single set of parameters (as in classical regression), we estimate **posterior distributions** of the parameters based on prior beliefs and observed data.
 
-In this project, we implemented **Bayesian Linear Regression using Pyro** on a **toy dataset**. The feature matrix \(X\) is 2D, and **Normal priors** were placed over the regression parameters, including the weights and bias.
+In this project, we implemented **Bayesian Linear Regression using Pyro** on a **toy dataset**. The feature matrix $\(X\)$ is 2D, and **Normal priors** were placed over the regression parameters, including the weights and bias.
 
 ---
 
@@ -32,7 +32,7 @@ $y = X \cdot w + b + \epsilon$
 
 - **$w$**: Weight vector with a **Normal prior** $\(w \sim \mathcal{N}(0, I)\)$  
 - **$b$**: Bias term with a **Normal prior** $\(b \sim \mathcal{N}(0, 1)\)$
--  **$\epsilon$**: Noise term with a Normal prior $\($\epsilon$ \sim \LogNormal(0, 1)\)$
+-  **$\epsilon$**: Noise term with a Normal prior $\(\epsilon$ \sim \LogNormal(0, 1)\)$
 - **$\y\|x$**: likelihood term with a probability ditribution $\(y \sim \mathcal{N}(X \cdot w + b, \epsilon^2)\)$
 
 This model captures uncertainty by placing priors on the weights and bias. After observing data, the posterior distribution is updated to reflect the new information.
