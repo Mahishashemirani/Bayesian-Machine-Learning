@@ -57,3 +57,51 @@ In Bayesian models, exact inference is often intractable, especially for high-di
 4. **Convergence Patterns**:  
    During training, the **ELBO (Evidence Lower Bound)** serves as the objective function to be maximized. A **steady increase in ELBO** indicates the model is learning an optimal approximation to the true posterior.
 
+## Training and Loss Behavior
+
+Training a **Bayesian Linear Regression model** involves optimizing the **Evidence Lower Bound (ELBO)** to approximate the posterior distribution of the parameters. Unlike classical linear regression, which aims to minimize a straightforward objective (e.g., Mean Squared Error), Bayesian regression models balance **data fit** and **regularization from the prior distributions**. As a result, the loss function reflects not only how well the model fits the data but also how it adjusts parameter uncertainty.
+
+During training, the **loss function tends to fluctuate more** compared to classical linear regression because:
+1. **Posterior Sampling**: At each step, the model samples from variational distributions, adding randomness to the optimization.
+2. **KL Divergence Optimization**: The KL term in the ELBO makes optimization more complex, leading to occasional jumps in the loss.
+3. **Exploration vs. Exploitation Trade-off**: The model tries to strike a balance between exploring uncertain parameter regions and exploiting regions with better fit to the data.
+
+These fluctuations are natural and expected in **variational inference** processes. As training progresses, the model typically converges, but the path to convergence can exhibit significant **noise** compared to the smooth curve seen in classical regression.
+
+Below is the plot of the **loss function over training epochs**, showing the fluctuations characteristic of Bayesian linear regression:
+
+![Loss Function Plot](plots/reg_Loss.png)
+## Results
+
+In this section, we present the outcomes of our **Bayesian Linear Regression**. The first plot provides a visualization of the **toy dataset** used for training, showing the relationship between the two input features and the target variable. 
+
+### Dataset Plot
+
+Below is the plot of the dataset used in the regression task:
+
+![Dataset Plot](plots/toy_data.png)
+
+---
+
+### Parameter Estimation
+
+The following table compares the **true parameter values** with the **estimated values** from the Bayesian model. The estimates reflect the **posterior mean** of the parameters, while the **standard deviation** serves as the **uncertainty (confidence interval)** for each parameter.
+
+| Parameter     | True Value | Estimated Value | Standard Deviation (±) |
+|---------------|------------|-----------------|------------------------|
+| Weight 1 $(\(w_1\))$ |  2.5       | 2.511             | 0.139                    |
+| Weight 2 $(\(w_2\))$ |  -1.5       | -1.503             | 0.149                    |
+| Bias $(\(b\))$      |  3       | 2.970             | 0.305                    |
+
+---
+
+### Interpretation
+
+- **Posterior Mean**: Represents the most likely value for each parameter based on the observed data and prior knowledge.
+- **Standard Deviation**: Provides insight into the **uncertainty** of each parameter, with larger values indicating greater uncertainty.
+
+This table highlights the model's ability to accurately estimate parameters while incorporating **uncertainty quantification** through Bayesian inference.
+
+---
+
+
