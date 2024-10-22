@@ -32,7 +32,7 @@ $y = X \cdot w + b + \epsilon$
 
 - **$w$**: Weight vector with a **Normal prior** $\(w \sim \mathcal{N}(0, I)\)$  
 - **$b$**: Bias term with a **Normal prior** $\(b \sim \mathcal{N}(0, 1)\)$
--  **$\epsilon$**: Noise term with a Normal prior $\(\epsilon \sim \LogNormal(0, 1)\)$
+-  **$\epsilon$**: Noise term with a Normal prior $\(\epsilon \sim LogNormal(0, 1)\)$
 - **$\y\|x$**: likelihood term with a probability ditribution $\(y \sim \mathcal{N}(X \cdot w + b, \epsilon^2)\)$
 
 This model captures uncertainty by placing priors on the weights and bias. After observing data, the posterior distribution is updated to reflect the new information.
