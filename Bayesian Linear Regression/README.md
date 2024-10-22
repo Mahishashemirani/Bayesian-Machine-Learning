@@ -101,6 +101,27 @@ The following table compares the **true parameter values** with the **estimated 
 - **Standard Deviation**: Provides insight into the **uncertainty** of each parameter, with larger values indicating greater uncertainty.
 
 This table highlights the model's ability to accurately estimate parameters while incorporating **uncertainty quantification** through Bayesian inference.
+---
+
+### Posterior Learning over Iterations
+
+Below, we provide **GIFs illustrating the evolution of posterior distributions** for the **intercept** and **weights** during the optimization process. These visualizations highlight how the model gradually refines the posterior estimates, balancing the observed data and prior beliefs.
+
+- **Intercept Posterior Evolution**:
+  
+  ![Intercept Posterior GIF](plots/Intercept_PDF.gif)
+
+- **Weight Posterior Evolution**:
+  
+  ![Weight Posterior GIF](plots/Slope_PDF.gif)
+
+---
+
+### Interpretation
+
+The above GIFs demonstrate how the posterior distributions start with **high uncertainty** (wide spread) and gradually become more focused around the **true parameter values** as more iterations are performed. This process reflects how **Bayesian inference** learns from data while incorporating **uncertainty** throughout the optimization. 
+
+As seen in the **standard deviations** from the table, the final parameter estimates capture both the **mean value** and the **uncertainty range**, which is essential for robust predictions in Bayesian models.
 
 ---
 
