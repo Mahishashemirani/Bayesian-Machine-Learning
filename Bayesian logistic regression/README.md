@@ -74,7 +74,8 @@ These fluctuations are expected in **variational inference**. The model typicall
 
 Below is the plot of **loss function over training epochs** showing typical fluctuations:
 
-![Loss Curve](plots/loss_curve.png)
+![Loss Curve](plots/Loss%20Curve.png)
+
 
 ---
 
@@ -86,7 +87,8 @@ Here are the outcomes from **Bayesian Logistic Regression**, with visualizations
 
 The plot below shows the data used in the regression task, with a logistic regression line showing the **relationship between feature(s) and target**:
 
-![Logistic Regression Line](plots/regression_line.png)
+![Logistic Regression Line](logistic%20regression%20line.png)
+
 
 ---
 
@@ -94,7 +96,8 @@ The plot below shows the data used in the regression task, with a logistic regre
 
 This plot includes the **mean logistic regression prediction** with a shaded **95% confidence interval**, capturing uncertainty:
 
-![Prediction with Uncertainty](plots/prediction_uncertainty.png)
+![Prediction with Uncertainty](plots/Prediction%20with%20Uncertainty.png)
+
 
 ---
 
