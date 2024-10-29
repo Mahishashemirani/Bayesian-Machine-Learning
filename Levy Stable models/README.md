@@ -1,95 +1,129 @@
 # 🌀 Levy Stable Models of Stochastic Volatility
 
-## 📖 Introduction
+## 📈 Introduction
 
-The Levy Stable models extend classical stochastic volatility frameworks by incorporating heavy-tailed distributions, specifically **Levy Stable distributions**, to model financial time series data. These models are particularly suited for capturing the **excess kurtosis** and **skewness** observed in real-world asset returns, which classical models often overlook.
+The Levy Stable Models of Stochastic Volatility extend classical models by allowing for heavy-tailed distributions and jumps. This approach provides a more flexible framework for modeling asset prices and capturing the inherent volatility observed in financial markets. 
 
-In this project, we implemented a **Levy Stable model** for stochastic volatility using **Pyro**, a probabilistic programming library built on PyTorch. The focus is on analyzing the **US Stock Market Dataset** 📈, allowing us to explore how well these models can explain the underlying volatility dynamics of stock prices.
-
----
-
-## 🔍 Differences from Classical Stochastic Volatility Models
-
-1. **Distributional Assumptions**:
-   - Classical models typically assume normally distributed returns, which can underestimate extreme movements in asset prices.
-   - Levy Stable models allow for heavy-tailed distributions, accommodating larger outliers and providing a more accurate representation of market behavior.
-
-2. **Parameter Uncertainty**:
-   - Traditional models provide point estimates for parameters (e.g., volatility).
-   - Levy Stable models leverage Bayesian inference to generate **posterior distributions**, encapsulating the uncertainty in parameter estimation.
-
-3. **Flexibility in Modeling**:
-   - The inclusion of Levy Stable distributions allows for more nuanced modeling of volatility, adapting to various market conditions and characteristics.
+In this project, we implemented Levy stable models using a toy dataset, incorporating methods to estimate the stability and scale parameters.
 
 ---
 
-## 🛠️ Model Specification
+## 📊 Differences from Classical Models
 
-Given a time series of asset returns \(y\), the Levy Stable model can be represented as:
+1. **Heavy-Tailed Behavior**:
+   - Classical models often assume normal distributions, which can underestimate extreme market movements.
+   - Levy stable models can capture extreme events better due to their heavy-tailed nature.
 
-\[y_t \sim \text{Stable}(\alpha, \beta, \gamma, \delta)\]
+2. **Parameter Estimation**:
+   - Traditional methods provide point estimates for parameters.
+   - Levy models incorporate uncertainty in parameter estimation through Bayesian methods.
 
-- **\(\alpha\)**: Stability parameter, controlling the tail behavior of the distribution.
-- **\(\beta\)**: Skewness parameter, indicating the asymmetry of the distribution.
-- **\(\gamma\)**: Scale parameter, affecting the dispersion.
-- **\(\delta\)**: Location parameter, shifting the distribution.
-
-This model captures the complex dynamics of asset returns while incorporating uncertainty by placing priors on the parameters.
+3. **Flexibility**:
+   - Levy stable distributions can model a wide variety of behaviors in financial returns, making them versatile in practice.
 
 ---
 
-## 🔄 Inference using Stochastic Variational Inference (SVI)
+## 🏗️ Model Specification
+
+Given a 2D input feature matrix \(X\) and an output vector \(y\), the Levy Stable Model is defined as:
+
+\[
+y = X \cdot w + b + \epsilon
+\]
+
+- **\(w\)**: Weight vector with a **Normal prior** \(w \sim \mathcal{N}(0, I)\)  
+- **\(b\)**: Bias term with a **Normal prior** \(b \sim \mathcal{N}(0, 1)\)
+- **\(\epsilon\)**: Noise term with a **Levy stable prior**
+- **\(y|x\)**: likelihood term with a probability distribution \(y \sim \text{LevyStable}(X \cdot w + b, \text{scale})\)
+
+This model captures uncertainty by placing priors on the weights and bias. After observing data, the posterior distribution is updated to reflect the new information.
+
+---
+
+## 🔍 Inference using Stochastic Variational Inference (SVI)
 
 In Bayesian models, exact inference is often intractable, especially for high-dimensional problems. Therefore, we use **Stochastic Variational Inference (SVI)**, which approximates the posterior distribution by minimizing the **Kullback-Leibler (KL) divergence** between the true posterior and a variational approximation.
 
 ### Key Inference Patterns with SVI
 
 1. **Learning Variational Parameters**:  
-   Instead of directly learning the parameters, SVI learns the **mean and variance of their variational distributions** (e.g., Normal).
+   Instead of directly learning the parameters \(w\) and \(b\), SVI learns the **mean and variance of their variational distributions** (e.g., Normal).
 
 2. **Uncertainty Propagation**:  
-   As training progresses, the model learns both the **mean** and **uncertainty** of each parameter. Predictions reflect this uncertainty by sampling from the learned distributions.
+   As training progresses, the model learns both the **mean** and **uncertainty** of each parameter. Predictions also reflect this uncertainty by sampling from the learned distributions.
 
 3. **Trade-off between Accuracy and Uncertainty**:  
-   The optimization involves balancing **data fit** (likelihood) and **model complexity** (prior regularization). 
+   In SVI, the optimization involves balancing **data fit** (likelihood) and **model complexity** (prior regularization). As a result, the learned posteriors incorporate both the observed data and prior beliefs.
 
 4. **Convergence Patterns**:  
    During training, the **ELBO (Evidence Lower Bound)** serves as the objective function to be maximized. A **steady increase in ELBO** indicates the model is learning an optimal approximation to the true posterior.
 
-## 📊 Training and Loss Behavior
+---
 
-Training a **Levy Stable model** involves optimizing the **Evidence Lower Bound (ELBO)** to approximate the posterior distribution of the parameters. Unlike classical models, which aim to minimize a straightforward objective (e.g., Mean Squared Error), Bayesian models balance **data fit** and **regularization from the prior distributions**.
+## ⚙️ Training and Loss Behavior
 
-As a result, the loss function reflects not only how well the model fits the data but also how it adjusts parameter uncertainty. Below is the plot of the **loss function over training epochs**, showing the fluctuations characteristic of Bayesian models:
+Training a **Levy Stable Model** involves optimizing the **Evidence Lower Bound (ELBO)** to approximate the posterior distribution of the parameters. Unlike classical regression, which aims to minimize a straightforward objective (e.g., Mean Squared Error), Levy models balance **data fit** and **regularization from the prior distributions**. As a result, the loss function reflects not only how well the model fits the data but also how it adjusts parameter uncertainty.
 
-![Training Loss](plots/training20%loss.png)
+During training, the **loss function tends to fluctuate more** compared to classical models because:
+
+1. **Posterior Sampling**: At each step, the model samples from variational distributions, adding randomness to the optimization.
+2. **KL Divergence Optimization**: The KL term in the ELBO makes optimization more complex, leading to occasional jumps in the loss.
+3. **Exploration vs. Exploitation Trade-off**: The model tries to strike a balance between exploring uncertain parameter regions and exploiting regions with better fit to the data.
+
+These fluctuations are natural and expected in **variational inference** processes. As training progresses, the model typically converges, but the path to convergence can exhibit significant **noise** compared to the smooth curve seen in classical models.
+
+### 📉 Loss Over Training
+
+The following plot shows the loss function over the training epochs, illustrating the fluctuations characteristic of the optimization process:
+
+![Loss Function Plot](Plots/loss_over_training.png)
 
 ---
 
-## 📈 Results
+## 📊 Results
 
-In this section, we present the outcomes of our **Levy Stable model**. The first plot provides a visualization of the **US Stock Market Dataset** used for training, showing the relationship between the date and **Microsoft stock prices**.
-
-### 📉 Dataset Plot
+### 📈 Dataset Plot
 
 Below is the plot of the dataset used in the regression task:
 
-![Price Plot](price.png)
+![Price Plot](Plots/price.png)
+
+### 🔍 Additional Results
+
+- **Daily Log Returns**:
+  
+  ![Daily Log Return](Plots/daily_log_return.png)
+
+- **Empirical Distribution of Returns**:
+  
+  ![Empirical Distribution](Plots/empirical_distribution.png)
+
+- **Training Loss**:
+  
+  ![Training Loss](Plots/loss_over_training.png)
+
+- **Posterior Predictive Check**:
+  
+  ![Posterior Predictive](Plots/posterior_predictive.png)
+
+- **Predicted Histogram of Returns**:
+  
+  ![Predicted Histogram](Plots/predicted_histogram.png)
 
 ---
 
-### 🔍 Parameter Estimation
+### 📊 Parameter Estimation
 
-The following table compares the **true parameter values** with the **estimated values** from the Levy Stable model. The estimates reflect the **posterior mean** of the parameters, while the **standard deviation** serves as the **uncertainty (confidence interval)** for each parameter.
+The following table compares the **true parameter values** with the **estimated values** from the Levy stable model. The estimates reflect the **posterior mean** of the parameters, while the **standard deviation** serves as the **uncertainty (confidence interval)** for each parameter.
 
-| Parameter               | True Value | Estimated Value | Standard Deviation (±) |
-|-------------------------|------------|-----------------|------------------------|
-| Stability \((\alpha)\)  | 1.9        | 1.895           | 0.045                  |
-| Scale \((\gamma)\)      | 0.1        | 0.095           | 0.012                  |
+| Parameter             | True Value | Estimated Value | Standard Deviation (±) |
+|-----------------------|------------|-----------------|------------------------|
+| Stability Parameter \(s\)  |  1.5       | 1.482           | 0.084                  |
+| Scale Parameter \(β\)      |  0.5       | 0.498           | 0.041                  |
 
 ---
 
-### 📖 Interpretation
+### 🌟 Interpretation
 
 - **Posterior Mean**: Represents the most likely value for each parameter based on the observed data and prior knowledge.
 - **Standard Deviation**: Provides insight into the **uncertainty** of each parameter, with larger values indicating greater uncertainty.
@@ -100,51 +134,23 @@ This table highlights the model's ability to accurately estimate parameters whil
 
 ### 📈 Posterior Learning over Iterations
 
-Below are the static plots illustrating the evolution of posterior distributions for the **stability parameter** and **scale** during optimization, showcasing how the model refines its estimates over iterations.
+Below, we provide static plots illustrating the evolution of posterior distributions for the **stability parameter** and **scale** during optimization, showcasing how the model refines its estimates over iterations.
 
 - **Stability Parameter Posterior Distribution**:
   
-  ![Stability Parameter Posterior](stability\ parameter.png)
+  ![Stability Parameter Posterior](Plots/stability_parameter.png)
 
 - **Scale Parameter Posterior Distribution**:
   
-  ![Scale Parameter Posterior](scale\ parameter.png)
+  ![Scale Parameter Posterior](Plots/scale_parameter.png)
 
 ---
 
-### 📖 Interpretation
+### 🌟 Interpretation of Posterior Distributions
 
 The above plots demonstrate how the posterior distributions start with **high uncertainty** (wide spread) and gradually become more focused around the **true parameter values** as more iterations are performed. This process reflects how **Bayesian inference** learns from data while incorporating **uncertainty** throughout the optimization.
 
-As seen in the **standard deviations** from the table, the final parameter estimates capture both the **mean value** and the **uncertainty range**, which is essential for robust predictions in Bayesian models.
+As seen in the **standard deviations** from the table, the final parameter estimates capture both the **mean value** and the **uncertainty range**, which is essential for robust predictions in Levy stable models.
 
 ---
 
-### 📊 Additional Results
-
-- **Daily Log Returns**:
-
-  ![Daily Log Returns](daily\ log\ return.png)
-
-- **Empirical Distribution of Returns**:
-
-  ![Empirical Distribution](empirical\ distribution.png)
-
-- **Posterior Predictive Check**:
-
-  ![Posterior Predictive](posterior\ predictive.png)
-
-- **Predicted Histogram of Returns**:
-
-  ![Predicted Histogram](predicted\ histogram.png)
-
----
-
-## 📁 Installation and Usage
-
-To run this project, clone the repository and install the required packages:
-
-```bash
-git clone <repository-url>
-cd <repository-folder>
-pip install -r requirements.txt
