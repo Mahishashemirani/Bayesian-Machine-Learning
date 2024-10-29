@@ -72,7 +72,7 @@ These fluctuations are expected in **variational inference**. The model typicall
 
 Below is the plot of **loss function over training epochs** showing typical fluctuations:
 
-![Loss Curve](Plots/Loss%20Curve.png)
+![Loss Curve](plots/Log_loss.png)
 
 
 ---
