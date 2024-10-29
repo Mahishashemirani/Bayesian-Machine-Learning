@@ -76,7 +76,7 @@ These fluctuations are natural and expected in **variational inference** process
 
 The following plot shows the loss function over the training epochs, illustrating the fluctuations characteristic of the optimization process:
 
-![Loss Function Plot](Plots/loss_over_training.png)
+![Loss Function Plot](Plots/training%20loss.png)
 
 ---
 
@@ -153,4 +153,3 @@ The above plots demonstrate how the posterior distributions start with **high un
 As seen in the **standard deviations** from the table, the final parameter estimates capture both the **mean value** and the **uncertainty range**, which is essential for robust predictions in Levy stable models.
 
 ---
-
