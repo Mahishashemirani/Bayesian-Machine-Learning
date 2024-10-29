@@ -77,27 +77,28 @@ Below is the plot of **loss function over training epochs** showing typical fluc
 
 ---
 
-## 📈 Results
+# Results
 
-Here are the outcomes from **Bayesian Logistic Regression**, with visualizations and comparisons demonstrating the model's uncertainty incorporation.
+Here are the outcomes from Bayesian Logistic Regression in a 2D space, with visualizations demonstrating the model's decision boundary and uncertainty incorporation.
 
-### Logistic Regression Fit with Data
+## Logistic Regression Fit with Data
 
-The plot below shows the data used in the regression task, with a logistic regression line showing the **relationship between feature(s) and target**:
+The plot below shows the data used in the regression task, with a decision boundary illustrating the relationship between features and the target. The boundary indicates the threshold where the model predicts one class over the other.
 
-![Logistic Regression Line](Plots/logistic%20regression%20line.png)
+![Decision Boundary](plots/DB.png)
 
 
+## Decision Boundary Over Epochs
+
+The GIF below visualizes how the decision boundary evolves over training epochs, showcasing the model's learning progression. Each frame illustrates the current state of the decision boundary, demonstrating how the model refines its predictions as it learns from the data.
+
+![Decision Boundary Over Epochs](plot/decision_boundary.gif)
 ---
+## Classification Accuracy
 
-### Prediction with Uncertainty
+The plot below shows the classification accuracy of the model over the training epochs, providing insights into the model's performance and its ability to generalize to the training data.
 
-This plot includes the **mean logistic regression prediction** with a shaded **95% confidence interval**, capturing uncertainty:
-
-![Prediction with Uncertainty](Plots/Prediction%20with%20Uncertainty.png)
-
-
----
+![Classification Accuracy](plots/Accuracy.png)
 
 ### Interpretation
 
