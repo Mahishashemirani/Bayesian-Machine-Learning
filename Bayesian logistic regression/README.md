@@ -26,14 +26,12 @@ This project implements **Bayesian Logistic Regression using Pyro** on a toy dat
 ## 🧩 Model Specification
 Given an input feature matrix \( X \) and binary output vector \( Y \), the Bayesian Logistic Regression model is defined as:
 
-\[
-y = \sigma(X \cdot w + b)
-\]
+$y = \sigma(X \cdot w + b)$
 
-- **\( w \)**: Weight vector with a **Normal prior** \( w \sim \mathcal{N}(0, 0.5^2) \)
-- **\( b \)**: Bias term with a **Normal prior** \( b \sim \mathcal{N}(0, 5^2) \)
-- **\( \sigma \)**: Sigmoid function mapping linear output to probabilities
-- **\( y \mid x \)**: Likelihood term with a **Bernoulli** distribution \( y \sim \text{Bernoulli}(\sigma(X \cdot w + b)) \)
+- **$\( w \)$**: Weight vector with a **Normal prior** \( w \sim \mathcal{N}(0, 0.5^2) \)
+- **$\( b \)$**: Bias term with a **Normal prior** \( b \sim \mathcal{N}(0, 5^2) \)
+- **$\( \sigma \)$**: Sigmoid function mapping linear output to probabilities
+- **$\( y \mid x \)$**: Likelihood term with a **Bernoulli** distribution \( y \sim \text{Bernoulli}(\sigma(X \cdot w + b)) \)
 
 This model captures uncertainty by placing priors on weights and bias. Observed data updates the posterior distribution to incorporate new information.
 
@@ -46,7 +44,7 @@ In Bayesian models, exact inference is often intractable, especially in high dim
 ### Key SVI Patterns
 
 1. **Variational Parameters**:
-   - Instead of learning \( w \) and \( b \) directly, SVI learns **mean and variance of their variational distributions** (e.g., Normal).
+   - Instead of learning $\( w \)$ and $\( b \)$ directly, SVI learns **mean and variance of their variational distributions** (e.g., Normal).
 
 2. **Uncertainty Propagation**:
    - The model learns both the **mean** and **uncertainty** of each parameter. Predictions reflect uncertainty by sampling from learned distributions.
