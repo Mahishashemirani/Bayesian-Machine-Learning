@@ -62,7 +62,7 @@ Training a **Levy Stable model** involves optimizing the **Evidence Lower Bound 
 
 As a result, the loss function reflects not only how well the model fits the data but also how it adjusts parameter uncertainty. Below is the plot of the **loss function over training epochs**, showing the fluctuations characteristic of Bayesian models:
 
-![Training Loss](loss\ over\ training.png)
+![Training Loss](plots/training20%loss.png)
 
 ---
 
