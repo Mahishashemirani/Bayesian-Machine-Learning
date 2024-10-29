@@ -92,23 +92,23 @@ Below is the plot of the dataset used in the regression task:
 
 - **Daily Log Returns**:
   
-  ![Daily Log Return](Plots/daily_log_return.png)
+  ![Daily Log Return](Plots/daily%20log%20return.png)
 
 - **Empirical Distribution of Returns**:
   
-  ![Empirical Distribution](Plots/empirical_distribution.png)
+  ![Empirical Distribution](Plots/empirical%20distribution.png)
 
 - **Training Loss**:
   
-  ![Training Loss](Plots/loss_over_training.png)
+  ![Training Loss](Plots/loss%20over%20training.png)
 
 - **Posterior Predictive Check**:
   
-  ![Posterior Predictive](Plots/posterior_predictive.png)
+  ![Posterior Predictive](Plots/posterior%20predictive.png)
 
 - **Predicted Histogram of Returns**:
   
-  ![Predicted Histogram](Plots/predicted_histogram.png)
+  ![Predicted Histogram](Plots/predicted%20histogram.png)
 
 ---
 
@@ -132,19 +132,6 @@ This table highlights the model's ability to accurately estimate parameters whil
 
 ---
 
-### 📈 Posterior Learning over Iterations
-
-Below, we provide static plots illustrating the evolution of posterior distributions for the **stability parameter** and **scale** during optimization, showcasing how the model refines its estimates over iterations.
-
-- **Stability Parameter Posterior Distribution**:
-  
-  ![Stability Parameter Posterior](Plots/stability_parameter.png)
-
-- **Scale Parameter Posterior Distribution**:
-  
-  ![Scale Parameter Posterior](Plots/scale_parameter.png)
-
----
 
 ### 🌟 Interpretation of Posterior Distributions
 
