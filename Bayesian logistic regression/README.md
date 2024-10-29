@@ -92,7 +92,7 @@ The plot below shows the data used in the regression task, with a decision bound
 
 The GIF below visualizes how the decision boundary evolves over training epochs, showcasing the model's learning progression. Each frame illustrates the current state of the decision boundary, demonstrating how the model refines its predictions as it learns from the data.
 
-![Decision Boundary Over Epochs](plot/decision_boundary.gif)
+![Decision Boundary Over Epochs](plots/decision_boundary.gif)
 
 ---
 ## Classification Accuracy
