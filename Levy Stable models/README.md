@@ -72,6 +72,35 @@ By visually comparing the two distributions:
 - **Gold** has thinner tails, meaning rare events are less likely, which aligns with its role as a stable asset in the financial markets.
 
 These plots support the quantitative comparison of the **stability parameters (α)** in the next section, where we fit alpha-stable distributions to the log-returns of both assets.
+## Mathematical Framework
+
+In this analysis, the **log-returns** of Bitcoin and Gold prices are modeled using the following equations:
+
+
+$\log p_t = \log p_{t-1} + \sqrt{h_t}$  
+
+$\log h_t = \log h_{t-1} + \sigma \cdot v_t$
+
+### Explanation of the Equations
+
+1. **First Equation**:  
+   This equation models the **log-price dynamics**.  
+   - \(\log p_t\) is the log-price at time \(t\).  
+   - \(\log p_{t-1}\) is the log-price at time \(t-1\).  
+   - \(\sqrt{h_t}\) accounts for **stochastic volatility**. This introduces randomness, meaning price changes are influenced by the **current level of volatility**.
+
+2. **Second Equation**:  
+   The second equation models the **evolution of volatility over time**, capturing **volatility clustering** (i.e., periods of high volatility followed by more high volatility).  
+   - \(\log h_t\) is the log-volatility at time \(t\).  
+   - \(\log h_{t-1}\) is the log-volatility at time \(t-1\).  
+   - \(v_t\) is a **stochastic term** representing the shocks to volatility.  
+   - \(\sigma\) is a **parameter** controlling the sensitivity of volatility to these shocks.
+
+### Key Idea: Volatility Clustering
+
+The **time-dependent volatility** (second equation) allows us to model **volatility clustering**, which is common in financial markets. This means that large price movements are often followed by large movements, and small movements are followed by small ones. 
+
+---
 
 
 ## 🏗️ Model Specification
