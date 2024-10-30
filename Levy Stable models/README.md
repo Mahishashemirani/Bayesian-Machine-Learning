@@ -170,63 +170,40 @@ To better understand how the model learns the **log-volatility $(log \(h_t\)$)**
    The **bottom subplot** helps you visually compare the log-volatility predictions against the **actual log-returns**, showing how well the model adapts to real market dynamics.
 
 ---
-## 📊 Results
+## Prediction Results for Volatility $(log \(h_t\))$
 
-### 📈 Dataset Plot
+Below are the **predicted log-volatility $\( \log h_t \)$** plots for **Bitcoin** and **Gold** based on the trained model. These predictions reflect the model’s ability to capture **volatility clustering** and **non-Gaussian behaviors** present in financial time series.
 
-Below is the plot of the dataset used in the regression task:
+### Prediction Plot for Bitcoin
 
-![Price Plot](Plots/price.png)
+![Bitcoin log-volatility Prediction](Plots/Bitcoin_vol.png)
 
-### 🔍 Additional Results
+### Prediction Plot for Gold
 
-- **Daily Log Returns**:
-  
-  ![Daily Log Return](Plots/daily%20log%20return.png)
-
-- **Empirical Distribution of Returns**:
-  
-  ![Empirical Distribution](Plots/empirical%20distribution.png)
-
-- **Training Loss**:
-  
-  ![Training Loss](Plots/loss%20over%20training.png)
-
-- **Posterior Predictive Check**:
-  
-  ![Posterior Predictive](Plots/posterior%20predictive.png)
-
-- **Predicted Histogram of Returns**:
-  
-  ![Predicted Histogram](Plots/predicted%20histogram.png)
+![Gold log-volatility Prediction](Plots/Gold_vol.png)
 
 ---
 
-### 📊 Parameter Estimation
+## Stability Parameter Estimates
 
-The following table compares the **true parameter values** with the **estimated values** from the Levy stable model. The estimates reflect the **posterior mean** of the parameters, while the **standard deviation** serves as the **uncertainty (confidence interval)** for each parameter.
+The **stability parameter \( \alpha \)** reflects how “fat” the tails of the **alpha-stable distribution** are. A lower value of $\( \alpha \)$ corresponds to **heavier tails**, indicating a higher likelihood of **extreme events** (e.g., sudden crashes or spikes).
 
-| Parameter             | True Value | Estimated Value | Standard Deviation (±) |
-|-----------------------|------------|-----------------|------------------------|
-| Stability Parameter \(s\)  |  1.5       | 1.482           | 0.084                  |
-| Scale Parameter \(β\)      |  0.5       | 0.498           | 0.041                  |
+Below is a table summarizing the estimated stability parameters and their uncertainties:
 
----
-
-### 🌟 Interpretation
-
-- **Posterior Mean**: Represents the most likely value for each parameter based on the observed data and prior knowledge.
-- **Standard Deviation**: Provides insight into the **uncertainty** of each parameter, with larger values indicating greater uncertainty.
-
-This table highlights the model's ability to accurately estimate parameters while incorporating **uncertainty quantification** through Bayesian inference.
+| Asset    | Stability Parameter \( \alpha \) | Uncertainty     |
+|----------|----------------------------------|-----------------|
+| Bitcoin  | \( 1.902 \)                      | \( \pm 0.008357 \) |
+| Gold     | \( 1.959 \)                      | \( \pm 0.005908 \) |
 
 ---
 
+### Comparison of Stability Parameters
 
-### 🌟 Interpretation of Posterior Distributions
+From the table, we can draw the following conclusions:
 
-The above plots demonstrate how the posterior distributions start with **high uncertainty** (wide spread) and gradually become more focused around the **true parameter values** as more iterations are performed. This process reflects how **Bayesian inference** learns from data while incorporating **uncertainty** throughout the optimization.
+- **Bitcoin** has a **lower stability parameter $(\(\alpha = 1.902\))$** compared to Gold, indicating **heavier tails** in its distribution of log-returns. This suggests Bitcoin is more prone to **rare, extreme events** (e.g., sudden price changes).
+- **Gold** has a slightly higher stability parameter $(\(\alpha = 1.959\))$, meaning it exhibits **less extreme volatility** than Bitcoin, although still showing  non-Gaussian behavior.
 
-As seen in the **standard deviations** from the table, the final parameter estimates capture both the **mean value** and the **uncertainty range**, which is essential for robust predictions in Levy stable models.
+In summary, **Bitcoin's price movements are more volatile and extreme** than those of Gold, as captured by the lower stability parameter $\( \alpha \)$.
 
 ---
