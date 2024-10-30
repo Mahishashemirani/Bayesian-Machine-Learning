@@ -85,16 +85,16 @@ $\log h_t = \log h_{t-1} + \sigma \cdot v_t$
 
 1. **First Equation**:  
    This equation models the **log-price dynamics**.  
-   - \(\log p_t\) is the log-price at time \(t\).  
-   - \(\log p_{t-1}\) is the log-price at time \(t-1\).  
-   - \(\sqrt{h_t}\) accounts for **stochastic volatility**. This introduces randomness, meaning price changes are influenced by the **current level of volatility**.
+   - $\(\log p_t\)$ is the log-price at time \(t\).  
+   - $\(\log p_{t-1}\)$ is the log-price at time \(t-1\).  
+   - $\(\sqrt{h_t}\)$ accounts for **stochastic volatility**. This introduces randomness, meaning price changes are influenced by the **current level of volatility**.
 
 2. **Second Equation**:  
    The second equation models the **evolution of volatility over time**, capturing **volatility clustering** (i.e., periods of high volatility followed by more high volatility).  
-   - \(\log h_t\) is the log-volatility at time \(t\).  
-   - \(\log h_{t-1}\) is the log-volatility at time \(t-1\).  
-   - \(v_t\) is a **stochastic term** representing the shocks to volatility.  
-   - \(\sigma\) is a **parameter** controlling the sensitivity of volatility to these shocks.
+   - $\(\log h_t\)$ is the log-volatility at time \(t\).  
+   - $\(\log h_{t-1}\)$ is the log-volatility at time \(t-1\).  
+   - $\(v_t\)$ is a **stochastic term** representing the shocks to volatility.  
+   - $\(\sigma\)$ is a **parameter** controlling the sensitivity of volatility to these shocks.
 
 ### Key Idea: Volatility Clustering
 
