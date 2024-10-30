@@ -33,6 +33,26 @@ For normal distributions, **α = 2**. As **α decreases**, the distribution beco
 2. **Parameter Estimation**:
    - Traditional methods provide point estimates for parameters.
    - Bayesian models incorporate uncertainty in parameter estimation through Bayesian methods.
+---
+## Visualization of Actual Log Prices
+
+Below are the **log-transformed prices** for **Bitcoin** and **Gold**. While these plots provide a general view of the price trends over time, they are **not particularly informative for detecting rare events** or understanding extreme behaviors. This is because rare events are better captured through the **distribution of log-returns** and their corresponding stability parameters.
+
+### Log-Price Plot for Bitcoin & Gold
+
+![Bitcoin Log Price](Plots/Log_prices.png)
+
+
+---
+
+### Why Log Prices are Less Informative for Rare Events
+
+While log prices smooth out the multiplicative nature of asset returns, they only reveal general price movements and **trend-following behavior**.  
+- **Extreme events** (e.g., sudden spikes or crashes) are more visible in the **log-returns distribution**, not in cumulative log prices.  
+- The **alpha-stable distribution** we modeled focuses on capturing these rare events, which are missed when looking only at the overall trend.
+
+---
+
 
 ## Log-Returns of Bitcoin and Gold
 
