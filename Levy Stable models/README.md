@@ -192,8 +192,8 @@ Below is a table summarizing the estimated stability parameters and their uncert
 
 | Asset    | Stability Parameter \( \alpha \) | Uncertainty     |
 |----------|----------------------------------|-----------------|
-| Bitcoin  | \( 1.902 \)                      | \( \pm 0.008357 \) |
-| Gold     | \( 1.959 \)                      | \( \pm 0.005908 \) |
+| Bitcoin  | $\( 1.902 \)$                      | $\( \pm 0.008357 \)$ |
+| Gold     | $\( 1.959 \)$                      | $\( \pm 0.005908 \)$ |
 
 ---
 
