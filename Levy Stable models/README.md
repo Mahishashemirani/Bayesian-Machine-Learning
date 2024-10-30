@@ -161,7 +161,7 @@ To better understand how the model learns the **log-volatility $(log \(h_t\)$)**
 ### How to Interpret the Animation
 
 1. **Learning Progress**:  
-   As the epochs progress, the model gradually adjusts its estimate of \( \log h_t \), improving its accuracy.
+   As the epochs progress, the model gradually adjusts its estimate of $\( \log h_t \)$, improving its accuracy.
 
 2. **Volatility Clustering**:  
    You can observe the **volatility clustering** behavior as the confidence intervals tighten during periods of low volatility and expand during high-volatility phases.
