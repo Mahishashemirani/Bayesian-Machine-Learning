@@ -102,64 +102,42 @@ The **time-dependent volatility** (second equation) allows us to model **volatil
 
 ---
 
+## Implementation
 
-## 🏗️ Model Specification
+Our model assumes that the **log-returns** of Bitcoin and Gold are distributed as:
 
-Given a 2D input feature matrix \(X\) and an output vector \(y\), the Levy Stable Model is defined as:
+$\log R_t \sim \text{Stable}(\alpha, \beta, \sqrt{h_t}, r_{\text{loc}})$
 
-\[
-y = X \cdot w + b + \epsilon
-\]
+where:
+- $\(\alpha\)$ is the **stability** parameter.
+- $\(\beta\)$ is the **skewness** parameter.
+- $\(\sqrt{h_t}\)$ is the **scale** or volatility parameter.
+- $\(r_{\text{loc}}\)$ is the **location** parameter.
 
-- **\(w\)**: Weight vector with a **Normal prior** \(w \sim \mathcal{N}(0, I)\)  
-- **\(b\)**: Bias term with a **Normal prior** \(b \sim \mathcal{N}(0, 1)\)
-- **\(\epsilon\)**: Noise term with a **Levy stable prior**
-- **\(y|x\)**: likelihood term with a probability distribution \(y \sim \text{LevyStable}(X \cdot w + b, \text{scale})\)
-
-This model captures uncertainty by placing priors on the weights and bias. After observing data, the posterior distribution is updated to reflect the new information.
+The goal of our analysis is to **infer these parameters** from the log-returns using **Stochastic Variational Inference (SVI)** to maximize the **Evidence Lower Bound (ELBO)**. Below is the implementation summary along with the necessary reparameterization details.
 
 ---
 
-## 🔍 Inference using Stochastic Variational Inference (SVI)
+### SVI and ELBO Optimization
 
-In Bayesian models, exact inference is often intractable, especially for high-dimensional problems. Therefore, we use **Stochastic Variational Inference (SVI)**, which approximates the posterior distribution by minimizing the **Kullback-Leibler (KL) divergence** between the true posterior and a variational approximation.
+In Bayesian inference, **maximizing the ELBO** allows us to estimate the posterior distribution of the parameters efficiently. SVI is chosen for this task because it scales well with large datasets like financial time series.
 
-### Key Inference Patterns with SVI
+The following plot shows the convergence of the ELBO during training, indicating that the model successfully learned the parameters:
 
-1. **Learning Variational Parameters**:  
-   Instead of directly learning the parameters \(w\) and \(b\), SVI learns the **mean and variance of their variational distributions** (e.g., Normal).
+![ELBO Convergence Plot](Plots/SVI_loss.png)
 
-2. **Uncertainty Propagation**:  
-   As training progresses, the model learns both the **mean** and **uncertainty** of each parameter. Predictions also reflect this uncertainty by sampling from the learned distributions.
-
-3. **Trade-off between Accuracy and Uncertainty**:  
-   In SVI, the optimization involves balancing **data fit** (likelihood) and **model complexity** (prior regularization). As a result, the learned posteriors incorporate both the observed data and prior beliefs.
-
-4. **Convergence Patterns**:  
-   During training, the **ELBO (Evidence Lower Bound)** serves as the objective function to be maximized. A **steady increase in ELBO** indicates the model is learning an optimal approximation to the true posterior.
+As seen in the plot, the ELBO increases and stabilizes over time, suggesting that the variational inference is working as expected.
 
 ---
 
-## ⚙️ Training and Loss Behavior
+### Reparameterization of the Stable Distribution
 
-Training a **Levy Stable Model** involves optimizing the **Evidence Lower Bound (ELBO)** to approximate the posterior distribution of the parameters. Unlike classical regression, which aims to minimize a straightforward objective (e.g., Mean Squared Error), Levy models balance **data fit** and **regularization from the prior distributions**. As a result, the loss function reflects not only how well the model fits the data but also how it adjusts parameter uncertainty.
-
-During training, the **loss function tends to fluctuate more** compared to classical models because:
-
-1. **Posterior Sampling**: At each step, the model samples from variational distributions, adding randomness to the optimization.
-2. **KL Divergence Optimization**: The KL term in the ELBO makes optimization more complex, leading to occasional jumps in the loss.
-3. **Exploration vs. Exploitation Trade-off**: The model tries to strike a balance between exploring uncertain parameter regions and exploiting regions with better fit to the data.
-
-These fluctuations are natural and expected in **variational inference** processes. As training progresses, the model typically converges, but the path to convergence can exhibit significant **noise** compared to the smooth curve seen in classical models.
-
-### 📉 Loss Over Training
-
-The following plot shows the loss function over the training epochs, illustrating the fluctuations characteristic of the optimization process:
-
-![Loss Function Plot](Plots/training%20loss.png)
+Inference for **non-symmetric stable distributions** can be challenging because the **log-probability function (log_prob)** is not implemented for the general case. To overcome this, we use a **reparameterization trick** provided by Pyro that reparameterizes a Stable random variable as the sum of two other stable random variables:  
+   > - One symmetric  
+   > - One totally skewed.
+Reparameterizing the stable distribution makes the model more computationally efficient during optimization, reducing the complexity of sampling and inference.
 
 ---
-
 ## 📊 Results
 
 ### 📈 Dataset Plot
