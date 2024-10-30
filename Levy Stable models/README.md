@@ -40,7 +40,7 @@ The following plot provides an overview of the **log-returns** for Bitcoin and G
 
 ### Plot of Bitcoin and Gold Log-Returns
 
-![Bitcoin and Gold Log-Returns](images/log_returns.png)
+![Bitcoin and Gold Log-Returns](Plots/Log_returns.png)
 
 ---
 
@@ -49,6 +49,30 @@ The following plot provides an overview of the **log-returns** for Bitcoin and G
 - **Bitcoin**: As observed, Bitcoin shows higher volatility with several significant spikes, indicating frequent large price movements.
 - **Gold**: Gold appears more stable, with fewer extreme movements compared to Bitcoin. However, rare events are still present in the form of small but sharp deviations.
 ---
+## Empirical Distributions of Bitcoin and Gold Log-Returns
+
+In addition to the time-series plot of log-returns, the following empirical distribution plots provide insights into the **probability distribution** of the log-returns for Bitcoin and Gold. 
+
+### Why Empirical Distributions Matter?
+The shape of the empirical distribution helps us understand the **heavy-tailed behavior** of each asset. A **normal distribution** assumption in financial models would underestimate the probability of extreme events, but the empirical distributions of Bitcoin and Gold often show **fatter tails**. This makes them suitable for modeling with **alpha-stable distributions**.
+
+### Bitcoin Empirical Distribution
+![Bitcoin Empirical Distribution](Plots/Bitcoin_Empirical.png)
+
+---
+
+### Gold Empirical Distribution
+![Gold Empirical Distribution](Plots/Gold_Empirical.png)
+
+---
+
+### Comparison and Relevance
+By visually comparing the two distributions:
+- **Bitcoin** shows significantly fatter tails, reinforcing the need for non-Gaussian models like the alpha-stable distribution.
+- **Gold** has thinner tails, meaning rare events are less likely, which aligns with its role as a stable asset in the financial markets.
+
+These plots support the quantitative comparison of the **stability parameters (α)** in the next section, where we fit alpha-stable distributions to the log-returns of both assets.
+
 
 ## 🏗️ Model Specification
 
