@@ -138,6 +138,37 @@ Inference for **non-symmetric stable distributions** can be challenging because 
 
 Reparameterizing the stable distribution makes the model more computationally efficient during optimization, reducing the complexity of sampling and inference.
 
+
+---
+## Visualization of Training Procedure
+
+To better understand how the model learns the **log-volatility $(log \(h_t\)$)** over time, we created an **animated GIF**. This animation shows the evolution of the **log-volatility estimates** per epoch along with their **confidence intervals** and compares it to the actual log-returns.
+
+### Description of the Visualization
+
+- **Top subplot (Blue & Red)**:  
+  Displays the evolution of the predicted **log-volatility $\( \log h_t \)$** across epochs.  
+  - **Blue Line**: Mean prediction of $\( \log h_t \)$ at each epoch.  
+  - **Red Shaded Region**: 90% **confidence interval** for the volatility estimate.
+
+- **Bottom subplot (Grey)**:  
+  Shows the **actual log-returns** over time, providing a comparison to see how well the model captures the volatility patterns.
+
+![Training Animation](Plots/Bitcoin_Volatility.gif)
+
+---
+
+### How to Interpret the Animation
+
+1. **Learning Progress**:  
+   As the epochs progress, the model gradually adjusts its estimate of \( \log h_t \), improving its accuracy.
+
+2. **Volatility Clustering**:  
+   You can observe the **volatility clustering** behavior as the confidence intervals tighten during periods of low volatility and expand during high-volatility phases.
+
+3. **Accuracy over Time**:  
+   The **bottom subplot** helps you visually compare the log-volatility predictions against the **actual log-returns**, showing how well the model adapts to real market dynamics.
+
 ---
 ## 📊 Results
 
