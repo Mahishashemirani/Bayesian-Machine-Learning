@@ -57,12 +57,12 @@ In addition to the time-series plot of log-returns, the following empirical dist
 The shape of the empirical distribution helps us understand the **heavy-tailed behavior** of each asset. A **normal distribution** assumption in financial models would underestimate the probability of extreme events, but the empirical distributions of Bitcoin and Gold often show **fatter tails**. This makes them suitable for modeling with **alpha-stable distributions**.
 
 ### Bitcoin Empirical Distribution
-![Bitcoin Empirical Distribution](Plots/Bitcoin_Empirical.png)
+![Bitcoin Empirical Distribution](Plots/Bitcoin_Emperical.png)
 
 ---
 
 ### Gold Empirical Distribution
-![Gold Empirical Distribution](Plots/Gold_Empirical.png)
+![Gold Empirical Distribution](Plots/Gold_Emperical.png)
 
 ---
 
