@@ -134,7 +134,8 @@ As seen in the plot, the ELBO increases and stabilizes over time, suggesting tha
 
 Inference for **non-symmetric stable distributions** can be challenging because the **log-probability function (log_prob)** is not implemented for the general case. To overcome this, we use a **reparameterization trick** provided by Pyro that reparameterizes a Stable random variable as the sum of two other stable random variables:  
 1. One symmetric  
-2. One totally skewed  
+2. One totally skewed
+
 Reparameterizing the stable distribution makes the model more computationally efficient during optimization, reducing the complexity of sampling and inference.
 
 ---
