@@ -1,12 +1,28 @@
-# 🌀 Levy Stable Models of Stochastic Volatility
+# 🌀  Volatility Modelling using Alpha Stable distribution
+# 📈Introduction
 
-## 📈 Introduction
+## Aim of the Analysis
 
-The Levy Stable Models of Stochastic Volatility extend classical models by allowing for heavy-tailed distributions and jumps. This approach provides a more flexible framework for modeling asset prices and capturing the inherent volatility observed in financial markets. 
+The objective of this analysis is to model and compare the volatility of Bitcoin and Gold prices using a **Bayesian model** with an **alpha-stable distribution**. The core idea is to assess which of these assets is more prone to **rare events and heavy-tailed behavior**. 
 
-In this project, we implemented Levy stable models using a toy dataset, incorporating methods to estimate the stability and scale parameters.
+By examining the **tail properties** of the fitted alpha-stable distributions, we aim to determine whether Bitcoin or Gold exhibits a higher risk of extreme price movements. This comparison will help us understand the stability and risk characteristics of both assets, which is crucial for portfolio management, hedging strategies, and risk assessment.
 
 ---
+
+## What is an Alpha-Stable Distribution?
+
+The **alpha-stable distribution** generalizes the Gaussian distribution, allowing for **skewness** and **heavy tails**. It is widely used in finance to model returns that deviate from the assumptions of normality (such as **fat tails** and **asymmetric behavior**). 
+
+Unlike a normal distribution, the alpha-stable distribution can capture **extreme events** with higher probability, which makes it suitable for modeling financial time series prone to **black swan events**.
+
+The key parameters of the alpha-stable distribution are:
+- **α (alpha)**: Stability parameter (0 < α ≤ 2). Lower values indicate **heavier tails** (higher chance of rare events).
+- **β (beta)**: Skewness parameter (−1 ≤ β ≤ 1). Determines the asymmetry of the distribution.
+- **γ (gamma)**: Scale parameter. Controls the spread or variability.
+- **δ (delta)**: Location parameter. Represents the central tendency or shift.
+
+For normal distributions, **α = 2**. As **α decreases**, the distribution becomes more "heavy-tailed," indicating a higher likelihood of rare, extreme movements.
+
 
 ## 📊 Differences from Classical Models
 
@@ -16,11 +32,22 @@ In this project, we implemented Levy stable models using a toy dataset, incorpor
 
 2. **Parameter Estimation**:
    - Traditional methods provide point estimates for parameters.
-   - Levy models incorporate uncertainty in parameter estimation through Bayesian methods.
+   - Bayesian models incorporate uncertainty in parameter estimation through Bayesian methods.
 
-3. **Flexibility**:
-   - Levy stable distributions can model a wide variety of behaviors in financial returns, making them versatile in practice.
+## Log-Returns of Bitcoin and Gold
 
+The following plot provides an overview of the **log-returns** for Bitcoin and Gold over the given time period. Log-returns are useful for analyzing financial time series because they help normalize price changes, making the data more comparable over time. Observing the spikes in the log-returns can indicate times of extreme events or sudden market movements.
+
+### Plot of Bitcoin and Gold Log-Returns
+
+![Bitcoin and Gold Log-Returns](images/log_returns.png)
+
+---
+
+### Interpretation
+
+- **Bitcoin**: As observed, Bitcoin shows higher volatility with several significant spikes, indicating frequent large price movements.
+- **Gold**: Gold appears more stable, with fewer extreme movements compared to Bitcoin. However, rare events are still present in the form of small but sharp deviations.
 ---
 
 ## 🏗️ Model Specification
