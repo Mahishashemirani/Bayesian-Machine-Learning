@@ -28,10 +28,10 @@ Given an input feature matrix \( X \) and binary output vector \( Y \), the Baye
 
 $y = \sigma(X \cdot w + b)$
 
-- **$\( w \)$**: Weight vector with a **Normal prior** \( w \sim \mathcal{N}(0, 0.5^2) \)
-- **$\( b \)$**: Bias term with a **Normal prior** \( b \sim \mathcal{N}(0, 5^2) \)
+- **$\( w \)$**: Weight vector with a **Normal prior** $\( w \sim \mathcal{N}(0, 0.5^2) \)$
+- **$\( b \)$**: Bias term with a **Normal prior** $\( b \sim \mathcal{N}(0, 5^2) \)$
 - **$\( \sigma \)$**: Sigmoid function mapping linear output to probabilities
-- **$\( y \mid x \)$**: Likelihood term with a **Bernoulli** distribution \( y \sim \text{Bernoulli}(\sigma(X \cdot w + b)) \)
+- **$\( y \mid x \)$**: Likelihood term with a **Bernoulli** distribution $\( y \sim \text{Bernoulli}(\sigma(X \cdot w + b)) \)$
 
 This model captures uncertainty by placing priors on weights and bias. Observed data updates the posterior distribution to incorporate new information.
 
