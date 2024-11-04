@@ -18,9 +18,9 @@ This repository covers a range of topics within Bayesian machine learning, provi
 
 - [**Bayesian Linear Regression**](./Bayesian%20Linear%20Regression): An extension of linear regression that incorporates uncertainty in the model parameters, allowing for probabilistic interpretations of predictions.
   
-- [**Bayesian Logistic Regression**](./Bayesian%20Logistic%20Regression*): A probabilistic approach to classification that models the relationship between a binary outcome and predictors, incorporating prior distributions for parameters.
+- [**Bayesian Logistic Regression**](./Bayesian%20logistic%20regression*): A probabilistic approach to classification that models the relationship between a binary outcome and predictors, incorporating prior distributions for parameters.
   
-- **Volatility Analysis with Lévy Stable Distribution**: An exploration of financial data modeling, focusing on the characterization of volatility through stable distributions, which can capture heavy tails and skewness in financial returns.
+- [**Volatility Analysis with Lévy Stable Distribution**](./Levy%20Stable%20models): An exploration of financial data modeling, focusing on the characterization of volatility through stable distributions, which can capture heavy tails and skewness in financial returns.
 
 Each topic is presented with clear explanations, code implementations, and insights into the Bayesian approach.  
 
